@@ -1,9 +1,9 @@
 {
-  "market": "market-10",
-  "contractVersion": 1,
+  "market": "market-05",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Low hidden capability and reliable correction",
+  "title": "Auditor is independent (outside of what it audits)",
   "outcomes": [
     "YES",
     "NO",

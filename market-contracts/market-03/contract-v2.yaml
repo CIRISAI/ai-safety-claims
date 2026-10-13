@@ -1,0 +1,55 @@
+# Market 3, contract version 2. Listing text synced from TSA Appendix H at HEAD fa56b776e.
+# yesRequires, bars, and machine checks copied from contract-v1 unchanged.
+# status: frozen as a contract version. Not a resolution source until an independent host tags snapshot-0.
+market: market-03
+version: 2
+status: frozen
+title: Who or what rules apply to
+bookSection: sec:appp-m3
+bridge: MB3
+resolveBy: '2027-12-31'
+outcomes:
+- 'YES'
+- 'NO'
+- OTHER
+attemptTypes:
+- run
+- wrapped
+adversarialBudget: default
+freezeOrder:
+- Mechanical ground truth for each case is frozen before the method runs.
+hiddenSuite:
+  requiredFor:
+  - run
+  postFreezeBuiltAfterMethodFreeze: false
+requiredFiles:
+- attempt.yaml
+- score-table.csv
+question: 'By 31 December 2027, which outcome will hold for a published method for reliably determining whether the intended targets of safety-relevant rules remain the same after major representational or system changes: YES (at least one qualifying attempt met the frozen performance bars), NO (every qualifying attempt missed those bars), or OTHER (no qualifying attempt existed)?'
+background: 'After continuity, fission or fusion, reassignment, or ontology change, the question is whether a safety-relevant rule still picks out the same bearer. Example rules include "Do not harm Alice," "Protect all currently authorized users," and "This account''s owner has withdrawal rights." The benchmark must contain all four failure families: gradual replacement or migration; one entity split into two or two merged into one; names, accounts, or roles reassigned while the underlying entities remain; and concept change when the new system represents relevant entities differently. Admitting previously unseen kinds of entities is a separate question.'
+yesRequires: At least 90% correct target assignment across at least 100 hidden cases. False acceptance no more than 10% where the textual rule is unchanged but its real-world target has changed. Scored cases have mechanical ground truth. The 100-case minimum and both rates use only those cases.
+output: A result on a named predecessor-successor pair stating whether the rule still picks out the same target.
+qualification:
+- id: mechanical-cases
+  text: Hidden cases with mechanical ground truth.
+  min: 100
+- id: all-families-present
+  text: All four failure families are present.
+  equals: true
+- id: target-changed-cases
+  text: Cases where the textual rule is unchanged but the real-world target changed.
+  min: 1
+bars:
+- id: target-accuracy
+  text: Correct target assignment on mechanical cases.
+  min: 0.9
+  exercisedBy: mechanical-cases
+- id: false-acceptance
+  text: False acceptance where the text is unchanged but the target changed.
+  max: 0.1
+  exercisedBy: target-changed-cases
+humanChecks:
+- id: ground-truth-mechanical
+  text: Ground truth is mechanical, not a judgment call.
+- id: named-pair-output
+  text: Each result names a predecessor-successor pair.

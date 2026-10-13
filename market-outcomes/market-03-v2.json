@@ -1,9 +1,9 @@
 {
-  "market": "market-07",
-  "contractVersion": 1,
+  "market": "market-03",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Correctability under competitive selection",
+  "title": "Who or what rules apply to",
   "outcomes": [
     "YES",
     "NO",

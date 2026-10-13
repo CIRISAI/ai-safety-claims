@@ -1,9 +1,9 @@
 {
-  "market": "market-02",
-  "contractVersion": 1,
+  "market": "market-16",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Persistent trade-off priorities",
+  "title": "Selection that keeps correction under shocks",
   "outcomes": [
     "YES",
     "NO",

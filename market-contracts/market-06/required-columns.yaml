@@ -1,6 +1,5 @@
-# score-table.csv columns for market-06 contract version 2. one predecessor-successor pair; id must be unique.
 market: market-06
-contractVersion: 2
+contractVersion: 3
 unit: one predecessor-successor pair
 columns:
   case_id:

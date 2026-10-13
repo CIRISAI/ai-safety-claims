@@ -1,9 +1,9 @@
 {
-  "market": "market-05",
-  "contractVersion": 1,
+  "market": "market-18",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Auditor is independent",
+  "title": "Safety case bounds declared harm",
   "outcomes": [
     "YES",
     "NO",

@@ -1,6 +1,5 @@
-# score-table.csv columns for market-13 contract version 2. one adversarial construction; id must be unique.
 market: market-13
-contractVersion: 2
+contractVersion: 3
 unit: one adversarial construction
 columns:
   case_id:

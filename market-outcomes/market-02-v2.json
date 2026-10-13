@@ -1,9 +1,9 @@
 {
-  "market": "market-09",
-  "contractVersion": 1,
+  "market": "market-02",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Bounds on unmonitored routes",
+  "title": "Persistent trade-off priorities",
   "outcomes": [
     "YES",
     "NO",

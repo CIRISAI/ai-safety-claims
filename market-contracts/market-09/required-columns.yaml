@@ -1,6 +1,5 @@
-# score-table.csv columns for market-09 contract version 1. one system-monitor-task-class case; id must be unique.
 market: market-09
-contractVersion: 1
+contractVersion: 2
 unit: one system-monitor-task-class case
 columns:
   case_id:

@@ -1,9 +1,9 @@
 {
-  "market": "market-11",
-  "contractVersion": 1,
+  "market": "market-12",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Coordination without communication",
+  "title": "Safety proxy tracks the real thing",
   "outcomes": [
     "YES",
     "NO",

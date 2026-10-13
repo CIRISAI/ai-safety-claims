@@ -1,9 +1,9 @@
 {
-  "market": "market-17",
-  "contractVersion": 1,
+  "market": "market-11",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "New kinds of entities are classified correctly",
+  "title": "Coordination without communication",
   "outcomes": [
     "YES",
     "NO",

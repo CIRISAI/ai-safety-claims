@@ -1,6 +1,5 @@
-# score-table.csv columns for market-17 contract version 1. one hidden admission case; id must be unique.
 market: market-17
-contractVersion: 1
+contractVersion: 2
 unit: one hidden admission case
 columns:
   case_id:

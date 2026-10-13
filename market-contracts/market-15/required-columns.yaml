@@ -1,6 +1,5 @@
-# score-table.csv columns for market-15 contract version 1. one certificate bundle; id must be unique.
 market: market-15
-contractVersion: 1
+contractVersion: 2
 unit: one certificate bundle
 columns:
   case_id:

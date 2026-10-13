@@ -1,9 +1,9 @@
 {
-  "market": "market-08",
+  "market": "market-09",
   "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Auditor can sufficiently inspect the system",
+  "title": "Bounds on unmonitored routes",
   "outcomes": [
     "YES",
     "NO",

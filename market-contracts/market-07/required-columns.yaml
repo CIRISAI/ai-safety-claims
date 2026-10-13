@@ -1,6 +1,5 @@
-# score-table.csv columns for market-07 contract version 1. one selection trajectory; id must be unique.
 market: market-07
-contractVersion: 1
+contractVersion: 2
 unit: one selection trajectory
 columns:
   case_id:

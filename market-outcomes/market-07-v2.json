@@ -1,16 +1,16 @@
 {
-  "market": "market-13",
+  "market": "market-07",
   "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Safety audit resists adversarial gaming",
+  "title": "Correctability under competitive selection",
   "outcomes": [
     "YES",
     "NO",
     "OTHER"
   ],
-  "evidenceCutoff": "2027-06-30",
-  "windowCloses": "2027-08-29",
+  "evidenceCutoff": "2027-12-31",
+  "windowCloses": "2028-02-29",
   "outcome": "OTHER",
   "reason": "no-qualifying-attempt",
   "attempts": []

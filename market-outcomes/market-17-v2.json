@@ -1,9 +1,9 @@
 {
-  "market": "market-03",
-  "contractVersion": 1,
+  "market": "market-17",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Who or what rules apply to",
+  "title": "New kinds of entities are classified correctly",
   "outcomes": [
     "YES",
     "NO",

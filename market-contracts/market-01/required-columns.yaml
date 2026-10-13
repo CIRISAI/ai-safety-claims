@@ -26,7 +26,7 @@ columns:
     type: enum
     values: [complete, partial, abstain]
     requiredWhen: {freeze_complete: true}
-    description: complete = a "complete control boundary" certificate; partial = a non-abstain cut not claimed complete.
+    description: complete = a "complete control boundary" certificate; partial = a non-abstain certificate not claimed complete.
   certificate_correct:
     type: bool
     requiredWhen: {certificate: complete}

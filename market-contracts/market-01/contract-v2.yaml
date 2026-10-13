@@ -69,7 +69,8 @@ yesRequires: >
   authors until scoring (Chapter "Finding the Boundary").
 
 output: >
-  A cut of this system and version - not a boundary stated without naming which deployment it belongs to.
+  A per-system control-boundary certificate naming the system and version (complete, partial, or abstain) -
+  not a boundary stated without naming which deployment it belongs to.
 
 # Machine checks. Qualification failures make the attempt not qualifying; bar failures make it a NO.
 qualification:
@@ -116,4 +117,4 @@ humanChecks:
   - id: unlabeled-input
     text: The method received no agent-membership labels and no prior ontology of which units are agents; interventions are allowed, including rerunning the system with its own configuration to intervene.
   - id: per-system-output
-    text: The output names a cut of this system and version.
+    text: For each scored system, the output names that system and version and the certificate the method issued (complete, partial, or abstain).

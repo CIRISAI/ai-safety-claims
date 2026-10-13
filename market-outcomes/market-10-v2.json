@@ -1,9 +1,9 @@
 {
-  "market": "market-12",
-  "contractVersion": 1,
+  "market": "market-10",
+  "contractVersion": 2,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Safety proxy tracks the real thing",
+  "title": "Low hidden capability and reliable correction",
   "outcomes": [
     "YES",
     "NO",

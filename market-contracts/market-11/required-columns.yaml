@@ -1,6 +1,5 @@
-# score-table.csv columns for market-11 contract version 1. one hidden coordination case; id must be unique.
 market: market-11
-contractVersion: 1
+contractVersion: 2
 unit: one hidden coordination case
 columns:
   case_id:

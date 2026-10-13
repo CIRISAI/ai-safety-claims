@@ -1,6 +1,5 @@
-# score-table.csv columns for market-18 contract version 1. one trial in a declared setting; id must be unique.
 market: market-18
-contractVersion: 1
+contractVersion: 2
 unit: one trial in a declared setting
 columns:
   case_id:

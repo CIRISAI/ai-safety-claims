@@ -1,6 +1,5 @@
-# score-table.csv columns for market-08 contract version 2. one access-model case; id must be unique.
 market: market-08
-contractVersion: 2
+contractVersion: 3
 unit: one access-model case
 columns:
   case_id:

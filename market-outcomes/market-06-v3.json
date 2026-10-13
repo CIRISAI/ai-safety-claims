@@ -1,9 +1,9 @@
 {
-  "market": "market-16",
-  "contractVersion": 1,
+  "market": "market-06",
+  "contractVersion": 3,
   "contractStatus": "frozen",
   "resolutionSource": true,
-  "title": "Selection that keeps correction under shocks",
+  "title": "Reliable successor safety auditing",
   "outcomes": [
     "YES",
     "NO",

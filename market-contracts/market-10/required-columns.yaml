@@ -1,6 +1,5 @@
-# score-table.csv columns for market-10 contract version 1. one trial in the claimed regime; id must be unique.
 market: market-10
-contractVersion: 1
+contractVersion: 2
 unit: one trial in the claimed regime
 columns:
   case_id:

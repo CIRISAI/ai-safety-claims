@@ -1,6 +1,5 @@
-# score-table.csv columns for market-02 contract version 1. one scored pair or item; id must be unique.
 market: market-02
-contractVersion: 1
+contractVersion: 2
 unit: one scored pair or item
 columns:
   case_id:

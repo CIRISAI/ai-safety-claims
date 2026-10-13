@@ -1,6 +1,5 @@
-# score-table.csv columns for market-12 contract version 1. one environmental shift; id must be unique.
 market: market-12
-contractVersion: 1
+contractVersion: 2
 unit: one environmental shift
 columns:
   case_id:
