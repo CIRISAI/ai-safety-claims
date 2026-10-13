@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import Banner from "../components/Banner.astro";
-import data, { href } from "../lib/data";
+import data, { href, displayMarketOutcome } from "../lib/data";
 
 const rows = data.markets.map((m: any) => {
   const latest = m.versions.find((v: any) => v.version === m.latestVersion);
   const attempts = latest.outcome?.attempts ?? [];
-  return { m, latest, attempts: attempts.length, qualifying: attempts.filter((a: any) => a.qualifying).length };
+  const shown = displayMarketOutcome(latest.outcome);
+  return { m, latest, attempts: attempts.length, qualifying: attempts.filter((a: any) => a.qualifying).length, shown };
 });
 ---
 <Base title="AI Safety Claims" description="Dated research questions on AI alignment with frozen bars, and the published attempts scored against them.">
@@ -24,7 +25,7 @@ const rows = data.markets.map((m: any) => {
     <table>
       <thead><tr><th class="num">#</th><th>Question</th><th>Contract</th><th>Resolve by</th><th class="num">Attempts</th><th class="num">Qualifying</th><th>Outcome</th></tr></thead>
       <tbody>
-        {rows.map(({ m, latest, attempts, qualifying }: any) => (
+        {rows.map(({ m, latest, attempts, qualifying, shown }: any) => (
           <tr>
             <td class="num">{m.number}</td>
             <td><a href={href(`markets/${m.market}/`)}>{m.title}</a></td>
@@ -32,7 +33,7 @@ const rows = data.markets.map((m: any) => {
             <td class="num">{latest.resolveBy}</td>
             <td class="num">{attempts}</td>
             <td class="num">{qualifying}</td>
-            <td class={latest.outcome?.outcome}>{latest.outcome?.outcome ?? "–"}</td>
+            <td class={shown.className}>{shown.label}</td>
           </tr>
         ))}
       </tbody>
@@ -40,13 +41,16 @@ const rows = data.markets.map((m: any) => {
   </div>
   <p class="muted">
     Market 14 (deployment criteria are binding) is not in the registry: its evidence is a few public documents, so it
-    is listed directly as a YES/NO question.
+    is listed directly as a YES/NO question. Before the filing window closes, <span class="OPEN">Open</span> means no
+    qualifying attempts yet (the outcome file still reads OTHER).
   </p>
 
-  <h2>Contribute</h2>
-  <p>
-    Have an idea, concept, or prototype for one of these questions? Sketch it in the
-    {" "}<a href="https://github.com/aintelope/ai-safety-claims-workbench">workbench</a>: freeze it, run it, and see
-    exactly what it still misses for a qualifying attempt. Sketches never count against a market.
-  </p>
+  <div class="cta">
+    <p>
+      <strong>Building an AI safety eval?</strong> Bring a prototype or a link to existing work. The registry shows which
+      open research question it informs, what your run already establishes, and which frozen requirements it still
+      misses. Early pilots are welcome; they do not have to qualify.
+    </p>
+    <a class="cta-button" href={href("contribute/")}>Contributors</a>
+  </div>
 </Base>

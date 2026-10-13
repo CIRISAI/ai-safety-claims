@@ -1,30 +1,80 @@
 ---
 import Base from "../../layouts/Base.astro";
 import data, { href, marketNumber } from "../../lib/data";
+
+const sorted = [...data.sketches].sort((a: any, b: any) => (b.completeness ?? 0) - (a.completeness ?? 0));
 ---
-<Base title="Work in progress" description="Sketches: unfinished attempts. No outcome reads them." noindex={true}>
-  <h1>Work in progress</h1>
+<Base title="Sketches" description="Unfinished evaluation attempts. Each shows a gap analysis against a frozen contract.">
+  <h1>Sketches</h1>
   <p>
-    Sketches are unfinished attempts. No outcome reads them, so they can never make a market YES or NO. Each shows
-    the registry's dry run: what is still missing for a qualifying attempt. Start one in the
+    Sketches are unfinished attempts under <code>sketches/</code>. No outcome reads them, so they never make a market
+    YES or NO. Completeness is the share of the contract's machine checks already met (qualification floors, exercised
+    bars, adversarial route when required). Maintainer checks are excluded. Start one from the
+    {" "}<a href={href("contribute/")}>Contributors</a> page or the
     {" "}<a href="https://github.com/aintelope/ai-safety-claims-workbench">workbench</a>.
   </p>
-  {data.sketches.length === 0 ? <p class="muted">No sketches yet.</p> : (
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Sketch</th><th>Market</th><th>Status</th><th class="num">To fix</th><th class="num">Qualification gaps</th></tr></thead>
-        <tbody>
-          {data.sketches.map((s: any) => (
-            <tr>
-              <td><a href={href(`sketches/${s.id}/`)}><code>{s.id}</code></a></td>
-              <td>{s.market ? <a href={href(`markets/${s.market}/`)}>Market {marketNumber(s.market)}</a> : "–"}{s.contractVersion && <> v{s.contractVersion}</>}</td>
-              <td>{s.report.status}</td>
-              <td class="num">{s.report.blocking.length}</td>
-              <td class="num">{s.report.qualification.length}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+  {sorted.length === 0 ? <p class="muted">No sketches yet.</p> : (
+    <>
+      <div class="sketch-sort" role="group" aria-label="Sort sketches">
+        <span class="muted">Sort:</span>
+        <button type="button" data-sort="completeness" aria-pressed="true">Completeness</button>
+        <button type="button" data-sort="market" aria-pressed="false">Market</button>
+        <button type="button" data-sort="name" aria-pressed="false">Name</button>
+        <button type="button" data-sort="date" aria-pressed="false">Date</button>
+      </div>
+      <div class="table-wrap">
+        <table id="sketch-table">
+          <thead><tr><th>Sketch</th><th>Market</th><th class="num">Date</th><th class="num">Complete</th><th>Status</th></tr></thead>
+          <tbody>
+            {sorted.map((s: any) => (
+              <tr
+                data-completeness={s.completeness ?? 0}
+                data-market={s.market ? marketNumber(s.market) : 0}
+                data-name={s.id}
+                data-date={s.filedAt ?? ""}
+              >
+                <td><a href={href(`sketches/${s.id}/`)}><code>{s.id}</code></a></td>
+                <td>{s.market ? <a href={href(`markets/${s.market}/`)}>Market {marketNumber(s.market)}</a> : "–"}{s.contractVersion && <> v{s.contractVersion}</>}</td>
+                <td class="num">{s.filedAt ?? "–"}</td>
+                <td class="num">{s.completeness ?? 0}%</td>
+                <td>{s.report.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   )}
 </Base>
+
+<script>
+  const table = document.getElementById("sketch-table");
+  if (table) {
+    const tbody = table.querySelector("tbody");
+    const buttons = document.querySelectorAll(".sketch-sort button");
+    const rows = () => Array.from(tbody.querySelectorAll("tr"));
+
+    function sort(key) {
+      const list = rows();
+      list.sort((a, b) => {
+        if (key === "completeness") return Number(b.dataset.completeness) - Number(a.dataset.completeness);
+        if (key === "market") {
+          const dm = Number(a.dataset.market) - Number(b.dataset.market);
+          return dm !== 0 ? dm : a.dataset.name.localeCompare(b.dataset.name);
+        }
+        if (key === "name") return a.dataset.name.localeCompare(b.dataset.name);
+        if (key === "date") return b.dataset.date.localeCompare(a.dataset.date);
+        return 0;
+      });
+      list.forEach((row) => tbody.appendChild(row));
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+        sort(btn.dataset.sort);
+      });
+    });
+  }
+</script>

@@ -103,6 +103,13 @@ others, within the wrapping rule in [`shared-rules/common-v1.yaml`](shared-rules
   `python -m validator dry-run <dir>` lists what it still misses, and submitting is a plain move to
   `submitted-attempts/`. See [`sketches/README.md`](sketches/README.md).
 
+## Contribute
+
+Three levels: an **idea** ([issue template](.github/ISSUE_TEMPLATE/idea-or-eval.yml)), a **pilot sketch**
+(gap analysis on the site; never resolves a question), or a **qualifying attempt** (frozen bar met or
+missed by deadline). Overview: [Contributors on the site](https://ai-safety-claims.com/contribute/).
+Process for agents: [`AGENTS.md`](AGENTS.md).
+
 See [`examples/`](examples/) for complete fictional attempts.
 
 ## Deadlines

@@ -52,12 +52,12 @@ def _contract(contract, outcome, source=None):
 
 
 def build_export():
-    contracts = load_contracts()
+    contracts_map = load_contracts()
     outcomes = build_outcomes(REPO)
     source_file = REPO / "sources" / "towards-asi-alignment.yaml"
     source = load_yaml(source_file) if source_file.exists() else None
     by_market = {}
-    for (market, version), contract in sorted(contracts.items()):
+    for (market, version), contract in sorted(contracts_map.items()):
         outcome = outcomes.get(f"{market}-v{version}.json")
         by_market.setdefault(market, []).append(_contract(contract, outcome, source))
     markets = []
@@ -71,9 +71,11 @@ def build_export():
     for d in sorted(p for p in base.iterdir() if p.is_dir()) if base.exists() else []:
         report = contribute.dry_run(d, REPO)
         attempt = contribute.load_yaml(d / "attempt.yaml") if (d / "attempt.yaml").exists() else {}
+        contract = contracts_map.get((attempt.get("market"), attempt.get("contractVersion")))
+        completeness = contribute.completeness_percent(contract, report) if contract else 0
         sketches.append({"id": d.name, "market": attempt.get("market"), "contractVersion": attempt.get("contractVersion"),
                          "attemptType": attempt.get("attemptType"), "submitter": attempt.get("submitter"),
-                         "filedAt": attempt.get("filedAt"), "notes": attempt.get("notes"),
+                         "filedAt": attempt.get("filedAt"), "notes": attempt.get("notes"), "completeness": completeness,
                          "report": report.summary()})
 
     return {

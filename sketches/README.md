@@ -5,6 +5,10 @@ rows filled in. It has the same folder layout and files as an attempt in `submit
 outcome file ever reads `sketches/`**, so a sketch can't move a market to YES, NO, or OTHER. Use it to
 build up an attempt in public, get feedback, or leave work that someone else can continue.
 
+**Contributors:** the site explains three levels (idea, pilot sketch, qualifying attempt) at
+[Contributors](https://ai-safety-claims.com/contribute/) and lists sketches with a completeness score at
+[Sketches](https://ai-safety-claims.com/sketches/). Agents should follow [AGENTS.md](../AGENTS.md).
+
 ## Start one
 
 To run an evaluation, start it in the

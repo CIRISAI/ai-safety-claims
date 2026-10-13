@@ -13,15 +13,47 @@ const sections = [
   ["Bar preview (not a result)", r.preview], ["Maintainer checks after submission", r.maintainer],
 ];
 ---
-<Base title={`Sketch ${sketch.id}`} noindex={true}>
-  <p class="muted"><a href={href("sketches/")}>Work in progress</a></p>
+<Base title={`Sketch ${sketch.id}`} description={`Gap analysis for sketch ${sketch.id} against a frozen market contract.`}>
+  <p class="muted"><a href={href("sketches/")}>Sketches</a> · <a href={href("contribute/")}>Contributors</a></p>
   <h1><code>{sketch.id}</code></h1>
   <p class="meta">
     {sketch.market && <span><a href={href(`markets/${sketch.market}/`)}>Market {marketNumber(sketch.market)}</a> v{sketch.contractVersion}</span>}
     {sketch.attemptType && <span>{sketch.attemptType}</span>}
+    {sketch.filedAt && <span>Filed {sketch.filedAt}</span>}
     <span><a href={tree(`sketches/${sketch.id}`)}>Files</a></span>
   </p>
-  <p class="note">A sketch never counts toward an outcome. Status: <strong>{r.status}</strong>.</p>
+
+  <div class="result">
+    <div class="result-main">
+      <span class="muted">Completeness</span>
+      <span class="result-value">{sketch.completeness ?? 0}%</span>
+      <span>{r.status}</span>
+    </div>
+    <p class="muted">
+      A sketch never counts toward an outcome. Completeness is machine checks only (not maintainer adjudication).
+      Missing a qualification floor means this run does not qualify; it is not a NO on the underlying question.
+    </p>
+  </div>
+
+  <h2>Three judgments</h2>
+  <ul>
+    <li>
+      <strong>Contract:</strong>{" "}
+      {sketch.market ? (
+        <>Filed against <a href={href(`markets/${sketch.market}/`)}>Market {marketNumber(sketch.market)}</a> v{sketch.contractVersion}.</>
+      ) : "No valid contract linked yet."}
+    </li>
+    <li>
+      <strong>What this run contains:</strong>{" "}
+      {r.evidence.length > 0 ? r.evidence.join("; ") : "No evidence files checked yet."}
+      {r.coverage.length > 0 && <> Coverage: {r.coverage.join("; ")}.</>}
+    </li>
+    <li>
+      <strong>Qualification floors still missing:</strong>{" "}
+      {r.qualification.length > 0 ? `${r.qualification.length} item(s) below.` : "None listed (machine checks may still depend on maintainer review after submission)."}
+    </li>
+  </ul>
+
   {sketch.notes && <p>{sketch.notes}</p>}
   {sections.filter(([, items]) => items.length > 0).map(([title, items]) => (
     <section>

@@ -1,5 +1,5 @@
 ---
-import data, { href, source, versionPath, marketNumber, humanize, sketchesFor } from "../lib/data";
+import data, { href, source, versionPath, marketNumber, humanize, sketchesFor, displayMarketOutcome } from "../lib/data";
 import Prose from "./Prose.astro";
 import Checks from "./Checks.astro";
 import Outcome from "./Outcome.astro";
@@ -22,8 +22,10 @@ const columns = Object.entries(contract.scoreTable.columns ?? {});
 const sketches = sketchesFor(market.market);
 const links = contract.bookLinks ?? {};
 const result = contract.outcome;
+const shown = displayMarketOutcome(result);
 const attempts = result?.attempts ?? [];
 const qualifying = attempts.filter((a: any) => a.qualifying).length;
+const marketSketches = [...sketches].sort((a: any, b: any) => (b.completeness ?? 0) - (a.completeness ?? 0));
 const outcomeFile = `market-outcomes/${contract.market}-v${contract.version}.json`;
 const resolving = data.registry.resolutionSource;
 const sections = [
@@ -48,8 +50,10 @@ const sections = [
   <div class="result">
     <div class="result-main">
       <span class="muted">Current outcome</span>
-      <span class={`result-value ${result.outcome}`}>{result.outcome}</span>
-      <span>{result.reason.replace(/-/g, " ")}</span>
+      <span class={`result-value ${shown.className}`}>{shown.label}</span>
+      {shown.fileReason && (
+        <span class="muted">file: {shown.fileReason.replace(/-/g, " ")}</span>
+      )}
     </div>
     <p>
       {attempts.length} attempt{attempts.length === 1 ? "" : "s"} filed, {qualifying} qualifying. Evidence cutoff
@@ -179,9 +183,28 @@ const sections = [
 <h2 id="outcome">Current outcome</h2>
 <Outcome outcome={contract.outcome} contract={contract} />
 
-{sketches.length > 0 && (
-  <details>
-    <summary>Work in progress for this market ({sketches.length} sketch{sketches.length > 1 ? "es" : ""}; sketches never count)</summary>
-    <ul>{sketches.map((s: any) => <li><a href={href(`sketches/${s.id}/`)}>{s.id}</a> <span class="muted">({s.report.status})</span></li>)}</ul>
-  </details>
+{marketSketches.length > 0 && (
+  <section id="evidence">
+    <h2>Evidence so far</h2>
+    <p class="muted">
+      Sketches are unfinished evaluations. They never move a market to YES or NO. Each row shows how much of the
+      contract's machine checks the run already meets, what it contains, and which qualification floors it still misses.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sketch</th><th class="num">Complete</th><th>Status</th><th class="num">To fix</th><th class="num">Qual gaps</th></tr></thead>
+        <tbody>
+          {marketSketches.map((s: any) => (
+            <tr>
+              <td><a href={href(`sketches/${s.id}/`)}><code>{s.id}</code></a></td>
+              <td class="num">{s.completeness ?? 0}%</td>
+              <td>{s.report.status}</td>
+              <td class="num">{s.report.blocking.length}</td>
+              <td class="num">{s.report.qualification.length}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
 )}

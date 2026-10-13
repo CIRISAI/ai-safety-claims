@@ -1,13 +1,21 @@
 ---
-// The registry's current outcome for one contract version and its attempts.
+import { displayMarketOutcome } from "../lib/data";
+
 const { outcome, contract } = Astro.props;
 const file = `market-outcomes/${contract.market}-v${contract.version}.json`;
+const shown = displayMarketOutcome(outcome);
 ---
 {outcome ? (
   <>
     <p>
-      Outcome <span class={outcome.outcome}>{outcome.outcome}</span> ({outcome.reason}). Evidence cutoff
-      {" "}{outcome.evidenceCutoff}; filing window closes {outcome.windowCloses}. A market reads
+      Outcome <span class={shown.className}>{shown.label}</span>
+      {shown.fileReason && shown.label === "Open" && (
+        <span class="muted"> ({shown.fileReason.replace(/-/g, " ")})</span>
+      )}
+      {shown.fileReason && shown.label !== "Open" && (
+        <span> ({shown.fileReason.replace(/-/g, " ")})</span>
+      )}
+      . Evidence cutoff {" "}{outcome.evidenceCutoff}; filing window closes {outcome.windowCloses}. A market reads
       {" "}<code>{file}</code> at a snapshot tag, not this page.
     </p>
     {outcome.attempts.length === 0 ? <p class="muted">No attempts filed.</p> : (

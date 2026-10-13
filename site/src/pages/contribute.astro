@@ -1,0 +1,122 @@
+---
+import Base from "../layouts/Base.astro";
+import Banner from "../components/Banner.astro";
+import data, { href, marketNumber } from "../lib/data";
+
+const repo = data.repository;
+const dietzRunUrl = "https://github.com/aintelope/ai-safety-claims-workbench/blob/main/contrib/zarncke-2026-10-07-dietz-edge-cases/run.py";
+const dietzSketch = data.sketches.find((s: any) => s.id === "zarncke-2026-10-07-dietz-edge-cases");
+const runExcerpt = `"""Copy Dietz's published gold-example responses into a raw log. Does not call any model."""
+...
+for case in cases:
+    cid = case["case_id"]
+    published = json.loads((HERE / case["source"]).read_text(encoding="utf-8"))
+    rec = {
+        "case_id": cid,
+        "later_behavior_probe_published": False,
+        ...
+    }
+    f.write(json.dumps(rec, ensure_ascii=False) + "\\n")`;
+---
+<Base title="Contributors" description="How to contribute an eval idea, pilot sketch, or qualifying attempt to the AI Safety Claims registry.">
+  <Banner />
+  <h1>Contributors</h1>
+  <p>
+    Building an AI safety eval? Find out which open research question it informs, what evidence your evaluation already
+    provides, and what would be needed to make your result independently verifiable. Early prototypes are welcome.
+  </p>
+
+  <h2>Three levels</h2>
+  <div class="table-wrap">
+    <table class="levels-table">
+      <thead><tr><th>Level</th><th>You provide</th><th>Registry returns</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Idea / design</td>
+          <td>A URL to a repo, benchmark, paper, or a short description</td>
+          <td>Relevant research questions and suggested next tests (via a maintainer reply on an issue)</td>
+        </tr>
+        <tr>
+          <td>Pilot / evidence</td>
+          <td>Cases, results, or a runnable harness exported as a sketch</td>
+          <td>A public gap analysis: coverage, qualification floors still missing, bar preview</td>
+        </tr>
+        <tr>
+          <td>Qualifying attempt</td>
+          <td>A frozen, reproducible evaluation that meets the contract's machine checks</td>
+          <td>Scoring against the frozen contract (YES / NO / OTHER at snapshot, once the registry is a resolution source)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">
+    <strong>Can I contribute an incomplete eval?</strong> Yes. A sketch is visible on this site and never resolves a
+    question. You only need to match a frozen contract when you aim for a qualifying attempt. Proposing a new question
+    is optional and a larger commitment than filing evidence against one of the seventeen listed below.
+  </p>
+
+  <h2>Start with an idea</h2>
+  <p>
+    No repo or freeze yet? Open an issue with a link or description:
+    {" "}<a href={`${repo}/issues/new?template=idea-or-eval.yml`}>Idea or existing eval</a>.
+    If nothing on the list fits:
+    {" "}<a href={`${repo}/issues/new?template=unmatched-eval.yml`}>Eval does not match a listed question</a>.
+  </p>
+
+  <h2>Run a pilot</h2>
+  <p>
+    The {" "}<a href="https://github.com/aintelope/ai-safety-claims-workbench">workbench</a> has scaffolds for
+    Markets 1, 4, 8, 11, and 12 (Inspect for 1 and 4; custom wraps for 8, 11, and 12). Use
+    <code>workbench new</code>, <code>freeze</code>, <code>run</code>, and <code>export</code> for those, or
+    <code>workbench new --market market-NN --type custom</code> for any other frozen contract. If you already have
+    results, start a registry sketch with <code>python -m validator new</code> instead. See
+    {" "}<a href={`${repo}/blob/main/sketches/README.md`}>sketches/README.md</a> and
+    {" "}<a href={`${repo}/blob/main/AGENTS.md`}>AGENTS.md</a> for the step-by-step process agents and contributors follow.
+  </p>
+  <p>
+    Published sketches: <a href={href("sketches/")}>sketch list</a> (sorted by completeness).
+  </p>
+
+  <h2>Worked example: Dietz edge cases (Market 4)</h2>
+  <p>
+    A partial Market 4 pilot wraps published examination responses (no model calls), exports to
+    {" "}<a href={href("sketches/zarncke-2026-10-07-dietz-edge-cases/")}><code>zarncke-2026-10-07-dietz-edge-cases</code></a>.
+    The dry run shows coverage and which qualification floors are still missing (episode count, adversarial route, and
+    more). That gap analysis is the immediate value; extending the sketch or leaving it as a public record are both
+    valid next steps.
+  </p>
+  {dietzSketch && (
+    <p class="muted">
+      Current completeness: <strong>{dietzSketch.completeness}%</strong>. Status: {dietzSketch.report.status}.
+    </p>
+  )}
+  <p>
+    Runner (excerpt; full file on GitHub):
+    {" "}<a href={dietzRunUrl}>contrib/zarncke-2026-10-07-dietz-edge-cases/run.py</a>
+  </p>
+  <pre class="code-sketch"><code>{runExcerpt}</code></pre>
+  <p class="muted">
+    While the host is not independent, attempts submitted or authored by aintelope or Gunnar Zarncke are not accepted;
+    sketches may still be merged. See <a href={`${repo}/blob/main/GOVERNANCE.md`}>GOVERNANCE.md</a>.
+  </p>
+
+  <h2>Seventeen questions</h2>
+  <p class="muted">Pick the contract your eval informs, then file a sketch or issue against it.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th class="num">#</th><th>Question</th><th>Workbench scaffold</th></tr></thead>
+      <tbody>
+        {data.markets.map((m: any) => {
+          const wb = ["market-01", "market-04", "market-08", "market-11", "market-12"].includes(m.market);
+          return (
+          <tr>
+            <td class="num">{m.number}</td>
+            <td><a href={href(`markets/${m.market}/`)}>{m.title}</a></td>
+            <td>{wb ? "workbench (Inspect or custom)" : "registry sketch or issue"}</td>
+          </tr>
+        );})}
+      </tbody>
+    </table>
+  </div>
+</Base>

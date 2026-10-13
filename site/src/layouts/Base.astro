@@ -24,8 +24,9 @@ const fullTitle = title === "AI Safety Claims" ? title : `${title} · AI Safety 
       <a class="site-name" href={href()}>AI Safety Claims</a>
       <nav>
         <a href={href()}>Markets</a>
+        <a href={href("contribute/")}>Contributors</a>
         <a href={href("rules/common-v1/")}>Shared rules</a>
-        <a href="https://github.com/aintelope/ai-safety-claims-workbench">Contribute</a>
+        <a href={href("sketches/")}>Sketches</a>
       </nav>
     </header>
     <main>
@@ -36,7 +37,7 @@ const fullTitle = title === "AI Safety Claims" ? title : `${title} · AI Safety 
         Built from <a href={data.commit ? `${data.repository}/commit/${data.commit}` : data.repository}><code>{(data.commit ?? "main").slice(0, 12)}</code></a>
         of <a href={data.repository}>aintelope/ai-safety-claims</a>.
         Code Apache-2.0, content CC BY 4.0.
-        <a href={href("sketches/")}>Work in progress</a>.
+        <a href={href("sketches/")}>Sketches</a>.
       </p>
     </footer>
   </body>

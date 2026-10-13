@@ -1,0 +1,30 @@
+name: Eval does not match a listed question
+description: Your eval tests something not covered by the seventeen frozen contracts
+title: "[unmatched] "
+labels: ["contribution", "question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposing a new contract is a larger commitment than filing a sketch against an existing question. Say whether you want a pointer to a nearby contract or you are actually proposing a new research target.
+  - type: textarea
+    id: eval-tests
+    attributes:
+      label: What does the eval test?
+    validations:
+      required: true
+  - type: dropdown
+    id: intent
+    attributes:
+      label: What do you want?
+      options:
+        - Pointer to the closest existing contract
+        - Help deciding if any listed question fits
+        - Propose a new contract (larger commitment)
+    validations:
+      required: true
+  - type: textarea
+    id: bar
+    attributes:
+      label: If proposing a new question, what bar would falsify success?
+      description: Leave blank if you only want a pointer to an existing market

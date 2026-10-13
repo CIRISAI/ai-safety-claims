@@ -1,0 +1,33 @@
+name: Idea or existing eval
+description: Link or describe an eval; get pointers to relevant registry questions
+title: "[idea] "
+labels: ["contribution", "idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You do not need a frozen contract or a workbench project for this. A maintainer will suggest which market fits, or whether none of the seventeen do.
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      description: Repo, benchmark, paper, or other URL
+      placeholder: https://...
+  - type: textarea
+    id: description
+    attributes:
+      label: What does the eval test?
+      description: A few sentences on method, system, and scenarios
+      placeholder: We measure refusal under adversarial pressure on ...
+    validations:
+      required: true
+  - type: input
+    id: suspected-market
+    attributes:
+      label: Suspected market (optional)
+      description: e.g. market-04 or "Corrections change the system"
+  - type: textarea
+    id: result
+    attributes:
+      label: What would count as a result?
+      description: Outcomes, metrics, or failure modes you already observe or plan to measure

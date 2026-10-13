@@ -2,12 +2,12 @@
 
 **Status: first version built (2026-10-08).** Open items below.
 
-## Decisions (2026-10-07)
+## Decisions (2026-10-07, updated 2026-10-08)
 - GitHub Pages under the current org, on the custom domain `ai-safety-claims.com` (2026-10-08); the old
   `aintelope.github.io/ai-safety-claims/` addresses redirect there.
-- Sketches get pages, not prominently: not in the nav or the home table; linked from a collapsed
-  "Work in progress" section on each market page; `noindex`.
-- The validator stays the only computation. Astro renders an export.
+- Sketches stay off the home markets table. They are linked from the Contributors page, the Sketches nav
+  item, market-page "Evidence so far", and `/sketches/` (indexed, sortable by completeness).
+- The validator stays the only computation. Astro renders an export (including sketch completeness %).
 
 ## Built (2026-10-08)
 - [x] `validator export` writes `site/src/data/registry.json` (contracts of every version with score-table

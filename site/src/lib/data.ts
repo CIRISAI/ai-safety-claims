@@ -48,3 +48,19 @@ export function humanize(key: string): string {
 export function sketchesFor(market: string): any[] {
   return data.sketches.filter((s: any) => s.market === market);
 }
+
+export type OutcomeDisplay = { label: string; className: string; fileReason?: string };
+
+/** Human label for a market outcome file before/after the filing window closes. */
+export function displayMarketOutcome(outcome: any): OutcomeDisplay {
+  if (!outcome?.outcome) return { label: "–", className: "" };
+  const raw = outcome.outcome as string;
+  const reason = outcome.reason as string | undefined;
+  if (raw === "OTHER" && reason === "no-qualifying-attempt" && outcome.windowCloses) {
+    const closes = Date.parse(`${outcome.windowCloses}T23:59:59Z`);
+    if (!Number.isNaN(closes) && Date.now() < closes) {
+      return { label: "Open", className: "OPEN", fileReason: reason };
+    }
+  }
+  return { label: raw, className: raw, fileReason: reason };
+}
