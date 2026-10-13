@@ -39,12 +39,13 @@ Manuscript source: `appendices/appP-bridge-predictions.tex`. Catalog metadata: `
 
 **Resolution criteria.** This question resolves to the value of the `outcome` field in the file `market-outcomes/<market>-v<K>.json` at git tag `snapshot-<cutoff>` of `github.com/<host>/ai-safety-claims`. Admins read that one field. They do not evaluate papers or re-score attempts: attempts the file marks non-qualifying, for any reason including unsettled judgments, do not count.
 
-**Fine print.**
-- Copy the market's fine print from Appendix P verbatim: the Common rules paragraph and its adversarial budget (serious or default), so the question stands on its own.
+**Fine print.** Paste the shared registry block from `shared-rules/metaculus-listing-v1.yaml` (host, companion site offline, where qualification lives), then these bullets (same for every registry market except `<market>`, `<K>`, `<cutoff>`):
 - Use the tag whenever it was created, if it exists by <cutoff + 90 days>, 23:59 UTC.
 - If the tag is missing on GitHub, or was moved after creation, use the version titled `snapshot-<cutoff>` of the Zenodo record <concept DOI>, which is deposited when the tag is created.
-- The question is annulled if, by <cutoff + 90 days>, 23:59 UTC, neither source has the file, or the file is unreadable, names a different market or contract version, has `contractStatus` other than `frozen`, has `resolutionSource` other than `true`, or has an `outcome` value not among the options.
+- The question is annulled if, by <cutoff + 90 days>, 23:59 UTC, neither source has the file `market-outcomes/<market>-v<K>.json`, or the file is unreadable, names a different market or contract version, has `contractStatus` other than `frozen`, has `resolutionSource` other than `true`, or has an `outcome` value not among the options.
 - OTHER means no qualifying attempt existed. It is not an annulment.
+
+Do **not** paste Common rules or adversarial budget into Metaculus fine print; those live on the registry site and in `shared-rules/common-v1.yaml` plus the frozen contract.
 
 **Background (not part of the resolution).** Copy the `predictionbackground` block only — plain language about what the market tests. Do **not** paste:
 - the opening authbar (chapters, bridges, Lean, what the market prices about a spine assumption);
@@ -70,7 +71,7 @@ A YES on the registry is not evidence that the underlying alignment problem is s
 
 **Resolution criteria.** *(Use the standard pointer block above with `<market>` = `market-01`, `<K>` = `2`, `<cutoff>` = `2027-12-31`.)*
 
-**Fine print.** *(Copy Common rules + adversarial budget from Appendix P for this market; add tag / Zenodo / annulment bullets from the standard block above.)*
+**Fine print.** *(Shared registry prose from `metaculus-listing-v1.yaml` + tag / Zenodo / annulment bullets from the standard block above.)*
 
 **Background.**
 

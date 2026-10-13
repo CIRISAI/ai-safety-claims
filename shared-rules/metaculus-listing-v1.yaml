@@ -1,0 +1,31 @@
+# Shared Metaculus fine-print prose for registry-resolved catalog markets (1–13, 15–18).
+# Qualification bars and adversarial budget live in common-v1.yaml and each contract — not here.
+# The export script in TSA (export_metaculus_questions.mjs) loads this file and adds per-market snapshot bullets.
+version: 1
+
+registryHost: >
+  The resolution source is the git repository named in the resolution criteria. At the snapshot tag,
+  `registry.yaml` records the registry host (currently `{host}`). Metaculus admins read the outcome file
+  only; they do not re-score attempts, read papers, or ask the maintainer to override the `outcome` field.
+
+companionSite: >
+  The companion site at {registrySite} is a human-readable view of the same frozen contracts and outcomes.
+  If the site is unreachable, slow, or disagrees with the repository at the snapshot tag, admins follow
+  the git tag and the files it contains (`market-outcomes/`, `market-contracts/`, `shared-rules/`).
+  The site going offline is not grounds to annul; missing or unreadable outcome files at the tag (and the
+  Zenodo fallback below) are.
+
+qualificationNotHere: >
+  What counts as a qualifying attempt, numeric bars, freeze order, and adversarial budget are defined in
+  `market-contracts/{marketId}/contract-v{contractVersion}.yaml` and `shared-rules/common-v1.yaml` at
+  the snapshot tag. They are not restated in this Metaculus fine print.
+
+hostTransfer: >
+  A change of registry host follows `GOVERNANCE.md` in the repository. This question keeps the contract
+  version and snapshot tag named in the resolution criteria; maintainers under the new host continue the
+  60-day adjudication window and snapshot discipline.
+
+interimHost: >
+  While `registry.yaml` at the snapshot tag has `hostIndependent: false`, the host is interim relative to
+  the book project the contracts were copied from. That flag does not change how admins read the outcome
+  file at the snapshot tag.
