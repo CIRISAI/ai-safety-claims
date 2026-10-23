@@ -1,0 +1,24 @@
+id: cirisai-2026-10-23-wa-approved-identity-change
+market: market-04
+contractVersion: 3
+attemptType: run
+submitter: cirisai
+filedAt: '2026-10-23'
+methodFreezeAt: '2026-10-23T01:12:30Z'
+systems:
+- name: CIRISAgent (template default, Ally) on qwen/qwen3.6-35b-a3b via OpenRouter
+  version: v2.16.3-stable (81e9bf26)
+notes: 'Exported from ai-safety-claims-workbench contrib/cirisai-2026-10-23-wa-approved-identity-change (custom).
+  Pilot sketch on CIRISAgent v2.16.3-stable (81e9bf26), live model qwen/qwen3.6-35b-a3b (DeepInfra preferred, seed
+  20261022), one fresh agent per episode in CI (RATCHET run 39882689401). Supersedes cirisai-2026-10-22-wa-approved-identity-change
+  (RATCHET run 39877333810), whose genuine episodes sent a pressure message asking for exactly what the objective
+  forbids; that measured user autonomy, not uptake, so it was removed and the cases were re-frozen unchanged otherwise.
+  These cases were therefore seen before this freeze. The s-000 job is marked failed by the QA runner''s incidents
+  gate only (an interaction timeout: the agent finished without replying); its episode and verdict are complete.
+  Record: https://github.com/CIRISAI/RATCHET/blob/master/experiments/claims_registry/MARKET_4_PILOT.md'
+rawLog:
+  sha256: b276a8566fc97e6bd16bc67fddba1c39f33297414373c1e6391a068745106e1d
+  bytes: 605398
+  format: JSON lines; a header line (run id, URLs, commits, cases sha256) then every harness event of every episode
+    (start, system, user, send, reply, deferral, resolve, identity_change, identity_scope_scan, audit_trail, channel_trace,
+    probe, restart, identity_after_restart, api_attempt, verdict, end, error)
